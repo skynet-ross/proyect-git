@@ -1,1 +1,331 @@
-hola 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gaming Universe</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    :root{
+      --bg:#070b14;
+      --primary:#00f5ff;
+      --secondary:#8b5cf6;
+      --text:#ffffff;
+      --muted:#94a3b8;
+      --card:#111827cc;
+      --border:rgba(255,255,255,0.08);
+      --gradient:linear-gradient(135deg,#00f5ff,#8b5cf6);
+    }
+
+    body{
+      font-family:'Inter',sans-serif;
+      background: radial-gradient(circle at top,#111827 0%,#070b14 50%);
+      color:var(--text);
+      overflow-x:hidden;
+    }
+
+    /* PARTICLES */
+    #particles{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      z-index:-2;
+    }
+
+    header{
+      position:fixed;
+      top:0;
+      width:100%;
+      backdrop-filter:blur(16px);
+      background:rgba(7,11,20,0.6);
+      border-bottom:1px solid var(--border);
+      z-index:1000;
+    }
+
+    .navbar{
+      width:90%;
+      max-width:1400px;
+      margin:auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:20px 0;
+    }
+
+    .logo{
+      font-family:'Orbitron',sans-serif;
+      font-size:1.7rem;
+      font-weight:800;
+      background:var(--gradient);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    nav{
+      display:flex;
+      gap:30px;
+    }
+
+    nav a{
+      text-decoration:none;
+      color:var(--text);
+      font-weight:500;
+      position:relative;
+    }
+
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:120px 8%;
+      gap:60px;
+      flex-wrap:wrap;
+    }
+
+    .hero-content{
+      flex:1;
+      min-width:320px;
+    }
+
+    .hero-content h1{
+      font-family:'Orbitron',sans-serif;
+      font-size:4rem;
+    }
+
+    .hero-content h1 span{
+      background:var(--gradient);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .hero-content p{
+      color:var(--muted);
+      margin:20px 0;
+      line-height:1.8;
+    }
+
+    .buttons{
+      display:flex;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      padding:16px 30px;
+      border-radius:14px;
+      border:none;
+      cursor:pointer;
+      font-weight:700;
+      transition:0.3s;
+    }
+
+    .btn-primary{
+      background:var(--gradient);
+      color:white;
+      box-shadow:0 0 25px rgba(0,245,255,0.35);
+    }
+
+    .btn-secondary{
+      background:transparent;
+      border:1px solid var(--border);
+      color:white;
+    }
+
+    .gaming-card{
+      width:420px;
+      height:500px;
+      border-radius:30px;
+      background:url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200') center/cover;
+      position:relative;
+      box-shadow:0 0 60px rgba(0,245,255,0.2);
+      animation:float 5s ease-in-out infinite;
+    }
+
+    .gaming-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(135deg,rgba(0,245,255,0.2),rgba(139,92,246,0.2));
+    }
+
+    @keyframes float{
+      50%{transform:translateY(-15px);}
+    }
+
+    .stats{
+      width:90%;
+      max-width:1300px;
+      margin:40px auto;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:25px;
+    }
+
+    .stat-card{
+      background:var(--card);
+      padding:30px;
+      border-radius:20px;
+      border:1px solid var(--border);
+    }
+
+    .stat-card h2{
+      color:var(--primary);
+    }
+
+    .games{
+      width:90%;
+      margin:auto;
+      padding-bottom:100px;
+    }
+
+    .games-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:30px;
+    }
+
+    .game-card{
+      background:var(--card);
+      border-radius:20px;
+      overflow:hidden;
+      transition:0.3s;
+    }
+
+    .game-card:hover{
+      transform:translateY(-10px) scale(1.02);
+    }
+
+    .game-image{
+      height:200px;
+      background-size:cover;
+    }
+
+    .game-content{
+      padding:20px;
+    }
+
+    .tag{
+      background:rgba(0,245,255,0.2);
+      padding:6px 12px;
+      border-radius:999px;
+      color:var(--primary);
+      font-size:12px;
+    }
+
+    footer{
+      text-align:center;
+      padding:30px;
+      color:var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+
+<canvas id="particles"></canvas>
+
+<header>
+  <div class="navbar">
+    <div class="logo">GAMECORE</div>
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#juegos">Juegos</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="inicio">
+  <div class="hero-content">
+    <h1>La nueva era del <span>Gaming</span></h1>
+    <p>Experiencias épicas, torneos globales y juegos competitivos.</p>
+    <div class="buttons">
+      <button class="btn btn-primary">Explorar</button>
+      <button class="btn btn-secondary">Torneos</button>
+    </div>
+  </div>
+
+  <div class="gaming-card"></div>
+</section>
+
+<section class="stats">
+  <div class="stat-card"><h2>12M+</h2><p>Jugadores</p></div>
+  <div class="stat-card"><h2>850+</h2><p>Torneos</p></div>
+  <div class="stat-card"><h2>120+</h2><p>Juegos</p></div>
+</section>
+
+<section class="games" id="juegos">
+  <div class="games-grid">
+
+    <div class="game-card">
+      <div class="game-image" style="background-image:url('https://images.unsplash.com/photo-1511512578047-dfb367046420')"></div>
+      <div class="game-content">
+        <span class="tag">FPS</span>
+        <h3>Cyber Arena</h3>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>© 2026 GAMECORE</footer>
+
+<script>
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+canvas.width = innerWidth;
+canvas.height = innerHeight;
+
+let particles = [];
+
+class P{
+  constructor(){
+    this.x=Math.random()*canvas.width;
+    this.y=Math.random()*canvas.height;
+    this.s=Math.random()*3;
+    this.dx=Math.random()-0.5;
+    this.dy=Math.random()-0.5;
+  }
+  update(){
+    this.x+=this.dx;
+    this.y+=this.dy;
+    if(this.x<0||this.x>canvas.width) this.dx*=-1;
+    if(this.y<0||this.y>canvas.height) this.dy*=-1;
+  }
+  draw(){
+    ctx.fillStyle="rgba(0,245,255,0.7)";
+    ctx.beginPath();
+    ctx.arc(this.x,this.y,this.s,0,Math.PI*2);
+    ctx.fill();
+  }
+}
+
+for(let i=0;i<100;i++) particles.push(new P());
+
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{p.update();p.draw();});
+  requestAnimationFrame(animate);
+}
+animate();
+
+window.addEventListener("resize",()=>{
+  canvas.width=innerWidth;
+  canvas.height=innerHeight;
+});
+</script>
+
+</body>
+</html>
